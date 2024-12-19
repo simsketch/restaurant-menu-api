@@ -10,7 +10,7 @@ A deliciously modern GraphQL API for managing restaurant menus, built with Node.
 
 - **GraphQL API**: Modern, flexible, and type-safe
 - **Full CRUD Operations**: Manage menu items and categories
-- **API Key Authentication**: Secure endpoint access
+- **API Key Authentication**: Secure endpoint access (removed temporarily for demo purposes)
 - **Interactive Documentation**: Built with Docusaurus
 - **GraphQL Playground**: Test your queries in real-time
 - **TypeScript**: Full type safety and modern development experience
@@ -20,8 +20,8 @@ A deliciously modern GraphQL API for managing restaurant menus, built with Node.
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
-- npm or yarn
+- Node.js (v16 or higher)
+- npm or pnpm
 - Git
 
 ### Installation
@@ -45,7 +45,7 @@ cp .env.example .env
 4. Edit `.env` and set your API key:
 ```
 PORT=4000
-API_KEY=your-secret-api-key-here
+API_KEY=your-secret-api-key-here (functionality temporarily disabled)
 ```
 
 ### Running the API
@@ -56,6 +56,8 @@ npm run start-all
 ```
 
 The API will be available at `http://localhost:4000/graphql`
+The documentation will be available at `http://localhost:3333`
+The single page front end will be available at `http://localhost:3030`
 
 ### Using the GraphQL Playground
 
@@ -278,7 +280,7 @@ query {
 }
 ```
 
-Remember to include your API key in the HTTP headers:
+Remember to include your API key in the HTTP headers (functionality temporarily disabled):
 ```json
 {
   "x-api-key": "your-api-key-here"
