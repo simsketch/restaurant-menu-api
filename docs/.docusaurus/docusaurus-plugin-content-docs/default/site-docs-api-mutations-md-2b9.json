@@ -1,0 +1,22 @@
+{
+  "id": "api/mutations",
+  "title": "Mutations",
+  "description": "The API provides comprehensive mutations for managing menu items, categories, variations, reviews, and bundles. Here are all available mutations with examples.",
+  "source": "@site/docs/api/mutations.md",
+  "sourceDirName": "api",
+  "slug": "/api/mutations",
+  "permalink": "/docs/api/mutations",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Queries",
+    "permalink": "/docs/api/queries"
+  }
+}

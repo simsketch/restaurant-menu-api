@@ -1,0 +1,307 @@
+{
+	"info": {
+		"_postman_id": "b5d8f8d0-5f1a-4b2c-8e1d-9b9b9b9b9b9b",
+		"name": "Restaurant Menu API",
+		"description": "A collection of GraphQL queries and mutations for the Restaurant Menu API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Queries",
+			"item": [
+				{
+					"name": "Get All Menu Items",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "your-api-key-here",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"query { menuItems { id name description price isAvailable categoryId category { id name } tags totalReviews reviews { rating comment } relatedItems { id name } } }\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/graphql",
+							"host": ["{{baseUrl}}"],
+							"path": ["graphql"]
+						},
+						"description": "Retrieve all menu items with their complete details"
+					}
+				},
+				{
+					"name": "Get Menu Item by ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "your-api-key-here",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"query($id: ID!) { menuItem(id: $id) { id name description price isAvailable categoryId category { id name } tags totalReviews reviews { rating comment } relatedItems { id name } } }\",\n    \"variables\": {\n        \"id\": \"item-id-here\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/graphql",
+							"host": ["{{baseUrl}}"],
+							"path": ["graphql"]
+						},
+						"description": "Retrieve a specific menu item by its ID"
+					}
+				},
+				{
+					"name": "Get All Categories",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "your-api-key-here",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"query { categories { id name description items { id name } } }\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/graphql",
+							"host": ["{{baseUrl}}"],
+							"path": ["graphql"]
+						},
+						"description": "Retrieve all categories with their menu items"
+					}
+				},
+				{
+					"name": "Get Category by ID",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "your-api-key-here",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"query($id: ID!) { category(id: $id) { id name description items { id name } } }\",\n    \"variables\": {\n        \"id\": \"category-id-here\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/graphql",
+							"host": ["{{baseUrl}}"],
+							"path": ["graphql"]
+						},
+						"description": "Retrieve a specific category by its ID"
+					}
+				}
+			]
+		},
+		{
+			"name": "Mutations",
+			"item": [
+				{
+					"name": "Create Menu Item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "your-api-key-here",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"mutation($input: MenuItemInput!) { createMenuItem(input: $input) { id name description price isAvailable categoryId } }\",\n    \"variables\": {\n        \"input\": {\n            \"name\": \"New Dish\",\n            \"description\": \"A delicious new dish\",\n            \"price\": 15.99,\n            \"categoryId\": \"category-id-here\",\n            \"isAvailable\": true,\n            \"tags\": [\"new\", \"special\"]\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/graphql",
+							"host": ["{{baseUrl}}"],
+							"path": ["graphql"]
+						},
+						"description": "Create a new menu item"
+					}
+				},
+				{
+					"name": "Update Menu Item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "your-api-key-here",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"mutation($id: ID!, $input: MenuItemInput!) { updateMenuItem(id: $id, input: $input) { id name description price isAvailable categoryId } }\",\n    \"variables\": {\n        \"id\": \"item-id-here\",\n        \"input\": {\n            \"name\": \"Updated Dish Name\",\n            \"description\": \"Updated description\",\n            \"price\": 18.99,\n            \"categoryId\": \"category-id-here\",\n            \"isAvailable\": true,\n            \"tags\": [\"updated\", \"special\"]\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/graphql",
+							"host": ["{{baseUrl}}"],
+							"path": ["graphql"]
+						},
+						"description": "Update an existing menu item"
+					}
+				},
+				{
+					"name": "Delete Menu Item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "your-api-key-here",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"mutation($id: ID!) { deleteMenuItem(id: $id) }\",\n    \"variables\": {\n        \"id\": \"item-id-here\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/graphql",
+							"host": ["{{baseUrl}}"],
+							"path": ["graphql"]
+						},
+						"description": "Delete a menu item"
+					}
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "your-api-key-here",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"mutation($input: CategoryInput!) { createCategory(input: $input) { id name description } }\",\n    \"variables\": {\n        \"input\": {\n            \"name\": \"New Category\",\n            \"description\": \"A new category of dishes\"\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/graphql",
+							"host": ["{{baseUrl}}"],
+							"path": ["graphql"]
+						},
+						"description": "Create a new category"
+					}
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "your-api-key-here",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"mutation($id: ID!, $input: CategoryInput!) { updateCategory(id: $id, input: $input) { id name description } }\",\n    \"variables\": {\n        \"id\": \"category-id-here\",\n        \"input\": {\n            \"name\": \"Updated Category Name\",\n            \"description\": \"Updated category description\"\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/graphql",
+							"host": ["{{baseUrl}}"],
+							"path": ["graphql"]
+						},
+						"description": "Update an existing category"
+					}
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "your-api-key-here",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"query\": \"mutation($id: ID!) { deleteCategory(id: $id) }\",\n    \"variables\": {\n        \"id\": \"category-id-here\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/graphql",
+							"host": ["{{baseUrl}}"],
+							"path": ["graphql"]
+						},
+						"description": "Delete a category (only if it has no menu items)"
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:4000",
+			"type": "string"
+		}
+	]
+} 

@@ -1,0 +1,22 @@
+{
+  "id": "api/overview",
+  "title": "Ya Gotta Eat API",
+  "description": "Welcome to Ya Gotta Eat - a deliciously modern GraphQL API for managing restaurant menus. Built with Node.js and TypeScript, it offers a fresh and tasty approach to menu management.",
+  "source": "@site/docs/api/overview.md",
+  "sourceDirName": "api",
+  "slug": "/api/overview",
+  "permalink": "/docs/api/overview",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "next": {
+    "title": "Queries",
+    "permalink": "/docs/api/queries"
+  }
+}

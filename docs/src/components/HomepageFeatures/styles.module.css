@@ -1,0 +1,27 @@
+.features {
+  display: flex;
+  align-items: center;
+  padding: 4rem 0;
+  width: 100%;
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.featureCard {
+  height: 100%;
+  padding: 2rem;
+  border-radius: var(--ifm-card-border-radius);
+  background-color: var(--ifm-background-color);
+  box-shadow: var(--ifm-global-shadow-lw);
+  transition: all 0.2s ease-in-out;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--ifm-global-shadow-md);
+}
+
+.featureTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+} 

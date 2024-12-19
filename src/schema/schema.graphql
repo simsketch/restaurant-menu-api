@@ -1,0 +1,226 @@
+type MenuItem {
+  id: ID!
+  name: String!
+  description: String
+  price: Float!
+  category: Category!
+  options: [String]
+  isAvailable: Boolean!
+  timeRestrictions: TimeRestriction
+  dietaryInfo: [DietaryRestriction!]
+  allergens: [Allergen!]
+  variations: [MenuItemVariation!]
+  reviews: [Review!]!
+  averageRating: Float
+  totalReviews: Int!
+  relatedItems: [MenuItem!]!
+  tags: [String!]!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  items: [MenuItem!]!
+}
+
+type TimeRestriction {
+  daysAvailable: [WeekDay!]!
+  startTime: String
+  endTime: String
+  seasonalStart: String
+  seasonalEnd: String
+}
+
+type MenuItemVariation {
+  id: ID!
+  name: String!
+  priceDelta: Float!
+  options: [String!]!
+}
+
+type Review {
+  id: ID!
+  menuItem: MenuItem!
+  rating: Int!
+  comment: String
+  response: String
+  createdAt: String!
+}
+
+type MenuBundle {
+  id: ID!
+  name: String!
+  description: String
+  items: [MenuItem!]!
+  totalPrice: Float!
+  savings: Float!
+}
+
+type MenuAnalytics {
+  popularItems: [MenuItemStats!]!
+  categoryDistribution: [CategoryStats!]!
+  priceRanges: PriceRangeStats!
+  dietaryOptions: DietaryStats!
+}
+
+type MenuItemStats {
+  item: MenuItem!
+  viewCount: Int!
+  orderCount: Int!
+  averageRating: Float
+}
+
+type CategoryStats {
+  category: Category!
+  itemCount: Int!
+  averagePrice: Float!
+}
+
+type PriceRangeStats {
+  low: Int!
+  medium: Int!
+  high: Int!
+  averagePrice: Float!
+}
+
+type DietaryStats {
+  vegetarianCount: Int!
+  veganCount: Int!
+  glutenFreeCount: Int!
+}
+
+enum WeekDay {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+enum DietaryRestriction {
+  VEGETARIAN
+  VEGAN
+  GLUTEN_FREE
+  DAIRY_FREE
+  NUT_FREE
+}
+
+enum Allergen {
+  NUTS
+  DAIRY
+  EGGS
+  SOY
+  WHEAT
+  SHELLFISH
+  FISH
+}
+
+input MenuItemInput {
+  name: String!
+  description: String
+  price: Float!
+  categoryId: ID!
+  options: [String]
+  isAvailable: Boolean
+  timeRestrictions: TimeRestrictionInput
+  dietaryInfo: [DietaryRestriction!]
+  allergens: [Allergen!]
+  tags: [String!]
+}
+
+input TimeRestrictionInput {
+  daysAvailable: [WeekDay!]!
+  startTime: String
+  endTime: String
+  seasonalStart: String
+  seasonalEnd: String
+}
+
+input CategoryInput {
+  name: String!
+}
+
+input MenuItemFilter {
+  minPrice: Float
+  maxPrice: Float
+  categories: [ID!]
+  searchTerm: String
+  isAvailable: Boolean
+  dietaryRestrictions: [DietaryRestriction!]
+}
+
+input MenuBundleInput {
+  name: String!
+  description: String
+  itemIds: [ID!]!
+}
+
+input ReviewInput {
+  rating: Int!
+  comment: String
+}
+
+input MenuItemVariationInput {
+  name: String!
+  priceDelta: Float!
+  options: [String!]!
+}
+
+type Query {
+  menuItems: [MenuItem!]!
+  menuItem(id: ID!): MenuItem
+  categories: [Category!]!
+  category(id: ID!): Category
+  
+  # Search and filtering
+  searchMenuItems(filter: MenuItemFilter): [MenuItem!]!
+  findSimilarItems(itemId: ID!): [MenuItem!]!
+  
+  # Analytics
+  getMenuAnalytics(timeRange: String): MenuAnalytics!
+  getItemPopularity(itemId: ID!): MenuItemStats!
+  
+  # Bundles
+  menuBundles: [MenuBundle!]!
+  menuBundle(id: ID!): MenuBundle
+}
+
+type Mutation {
+  # Menu Items
+  createMenuItem(input: MenuItemInput!): MenuItem!
+  updateMenuItem(id: ID!, input: MenuItemInput!): MenuItem!
+  deleteMenuItem(id: ID!): Boolean!
+  toggleItemAvailability(id: ID!): MenuItem!
+  
+  # Categories
+  createCategory(input: CategoryInput!): Category!
+  updateCategory(id: ID!, input: CategoryInput!): Category!
+  deleteCategory(id: ID!): Boolean!
+  reorderMenuItems(categoryId: ID!, orderedItemIds: [ID!]!): Category!
+  
+  # Variations
+  addMenuItemVariation(itemId: ID!, variation: MenuItemVariationInput!): MenuItem!
+  removeMenuItemVariation(itemId: ID!, variationId: ID!): MenuItem!
+  
+  # Reviews
+  addReview(itemId: ID!, input: ReviewInput!): Review!
+  respondToReview(reviewId: ID!, response: String!): Review!
+  
+  # Bundles
+  createMenuBundle(input: MenuBundleInput!): MenuBundle!
+  updateMenuBundle(id: ID!, input: MenuBundleInput!): MenuBundle!
+  deleteMenuBundle(id: ID!): Boolean!
+  
+  # Daily Specials
+  setDailySpecials(itemIds: [ID!]!): [MenuItem!]!
+}
+
+type Subscription {
+  menuItemUpdated: MenuItem!
+  menuItemAvailabilityChanged: MenuItem!
+  categoryUpdated: Category!
+  dailySpecialsChanged: [MenuItem!]!
+  newReviewAdded(itemId: ID): Review!
+} 
