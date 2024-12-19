@@ -58,6 +58,20 @@ The API will be available at `http://localhost:4000/graphql`
 The documentation will be available at `http://localhost:3333`
 The single page front end will be available at `http://localhost:3030`
 
+### Screenshots
+
+`API playground`
+![GraphQL Dashboard](graphql-dashboard.png)
+
+
+`Documentation`
+![GraphQL Dashboard](documentation.png)
+
+
+`Front End Website`
+![GraphQL Dashboard](frontend-menu.png)
+
+
 ### Using the GraphQL Playground
 
 1. Open `http://localhost:4000/graphql` in your browser.
@@ -67,7 +81,6 @@ The single page front end will be available at `http://localhost:3030`
 1. Open Postman and click on "Import".
 2. Select the `postman_collection.json` file from the project root.
 3. Set the `baseUrl` environment variable to `http://localhost:4000`.
-4. Add your API key to the headers for each request.
 
 ### Running Tests
 
