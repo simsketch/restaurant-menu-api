@@ -14,7 +14,7 @@ Welcome to Ya Gotta Eat - a deliciously modern GraphQL API for managing restaura
 - **⚡ Real-time Updates**: Keep your menu fresh with instant updates
 - **🛠️ Developer-Friendly**: Comprehensive documentation and examples that make integration a piece of cake
 
-## Authentication
+## Authentication (not implemented, TODO)
 
 The API uses API key authentication. You'll need to include your API key in the `x-api-key` header with every request.
 
